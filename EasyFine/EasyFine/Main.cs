@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿// By Nitro
+// Ver: v1.0
+
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EasyFine {
@@ -15,6 +12,8 @@ namespace EasyFine {
 
         public Main() {
             InitializeComponent();
+            Utils.smoothBorder(minPanel, minPanel.Width);
+            Utils.smoothBorder(exitPanel, exitPanel.Width);
             SetStyle(
             ControlStyles.UserPaint |
             ControlStyles.AllPaintingInWmPaint |
