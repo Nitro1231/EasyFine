@@ -11,7 +11,8 @@ using System.Diagnostics;
 namespace EasyFine {
     public partial class Item : UserControl {
         int progress = 0;
-        string name, path;
+        string name, downloadPath;
+        string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NitroStudio\EasyFine";
         bool isReady = false, isDownloaded = false;
         WebBrowser webBrowser = new WebBrowser();
 
@@ -19,7 +20,7 @@ namespace EasyFine {
             InitializeComponent();
             Utils.smoothBorder(this, 10);
             this.name = name;
-            path = Directory.GetCurrentDirectory() + $"\\{name}.jar";
+            downloadPath = path + $"\\{name}.jar";
             textLabel.Text = name;
             webBrowser.ScriptErrorsSuppressed = true;
             webBrowser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(DocumentCompleted);
@@ -36,10 +37,12 @@ namespace EasyFine {
                         break;
                     }
                 } else {
-                    if (File.Exists(path)) {
-                        ProcessStartInfo ps = new ProcessStartInfo("CMD.exe", $"/c java -jar \"{path}\"");
+                    if (File.Exists(downloadPath)) {
+                        ProcessStartInfo ps = new ProcessStartInfo("CMD.exe", $"/c java -jar \"{downloadPath}\"");
+                        ps.UseShellExecute = false;
                         ps.CreateNoWindow = true;
                         Process.Start(ps);
+                        
                     }else {
                         isDownloaded = false;
                         progress = 0;
@@ -55,7 +58,7 @@ namespace EasyFine {
             isReady = true;
             textLabel.ForeColor = Color.FromArgb(240, 240, 240);
 
-            if (File.Exists(path)) {
+            if (File.Exists(downloadPath)) {
                 isDownloaded = true;
                 progress = 100;
                 textLabel.Text = $"{name}\nDownloaded";
@@ -63,11 +66,12 @@ namespace EasyFine {
         }
 
         private void download(string dURL) {
+            Directory.CreateDirectory(path);
             Thread thread = new Thread(() => {
                 WebClient client = new WebClient();
                 client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(onDownload);
                 client.DownloadFileCompleted += new AsyncCompletedEventHandler(onDownloadCompleted);
-                client.DownloadFileAsync(new Uri(dURL), path);
+                client.DownloadFileAsync(new Uri(dURL), downloadPath);
             });
             thread.Start();
         }

@@ -4,16 +4,31 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Windows.Forms;
+using FontAwesome.Sharp;
 
 namespace EasyFine {
     public partial class Main : Form {
+        string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NitroStudio\EasyFine";
         WebBrowser webBrowser = new WebBrowser();
 
         public Main() {
             InitializeComponent();
             Utils.smoothBorder(minPanel, minPanel.Width);
             Utils.smoothBorder(exitPanel, exitPanel.Width);
+            Directory.CreateDirectory(path);
+
+            flowLayoutPanel1.Left = (mainPanel.Width - flowLayoutPanel1.Width) / 2;
+            openFolder.URL = path;
+            openFolder.image = IconChar.FolderOpen.ToBitmap(40, Color.White);
+            mailLink.image = IconChar.At.ToBitmap(40, Color.White);
+            blogLink.image = IconChar.PaperPlane.ToBitmap(40, Color.White);
+            gitLink.image = IconChar.Github.ToBitmap(40, Color.White);
+            ytLink.image = IconChar.Youtube.ToBitmap(40, Color.White);
+            tLink.image = IconChar.Twitter.ToBitmap(40, Color.White);
+            dcLink.image = IconChar.Discord.ToBitmap(40, Color.White);
+
             SetStyle(
             ControlStyles.UserPaint |
             ControlStyles.AllPaintingInWmPaint |
