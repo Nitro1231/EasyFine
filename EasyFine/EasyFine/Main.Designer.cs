@@ -24,14 +24,13 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.topPanel = new System.Windows.Forms.Panel();
             this.minPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.exitPanel = new System.Windows.Forms.Panel();
-            this.logo = new System.Windows.Forms.PictureBox();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.itemBox = new System.Windows.Forms.FlowLayoutPanel();
+            this.tabPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.openFolder = new EasyFine.Link();
             this.mailLink = new EasyFine.Link();
             this.blogLink = new EasyFine.Link();
@@ -39,30 +38,17 @@
             this.ytLink = new EasyFine.Link();
             this.tLink = new EasyFine.Link();
             this.dcLink = new EasyFine.Link();
-            this.topPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            this.tab1 = new EasyFine.Ctl.Tab();
+            this.tab2 = new EasyFine.Ctl.Tab();
             this.mainPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.tabPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // topPanel
-            // 
-            this.topPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.topPanel.Controls.Add(this.minPanel);
-            this.topPanel.Controls.Add(this.label1);
-            this.topPanel.Controls.Add(this.exitPanel);
-            this.topPanel.Controls.Add(this.logo);
-            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(835, 60);
-            this.topPanel.TabIndex = 0;
-            this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
             // 
             // minPanel
             // 
             this.minPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(196)))), ((int)(((byte)(15)))));
-            this.minPanel.Location = new System.Drawing.Point(334, 5);
+            this.minPanel.Location = new System.Drawing.Point(317, 12);
             this.minPanel.Name = "minPanel";
             this.minPanel.Size = new System.Drawing.Size(18, 18);
             this.minPanel.TabIndex = 1;
@@ -71,11 +57,12 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(55, 9);
+            this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 37);
+            this.label1.Size = new System.Drawing.Size(370, 100);
             this.label1.TabIndex = 1;
             this.label1.Text = "EasyFine";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -84,7 +71,7 @@
             // exitPanel
             // 
             this.exitPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.exitPanel.Location = new System.Drawing.Point(357, 5);
+            this.exitPanel.Location = new System.Drawing.Point(340, 12);
             this.exitPanel.Margin = new System.Windows.Forms.Padding(2);
             this.exitPanel.Name = "exitPanel";
             this.exitPanel.Size = new System.Drawing.Size(18, 18);
@@ -92,28 +79,16 @@
             this.exitPanel.Click += new System.EventHandler(this.exitPanel_Click);
             this.exitPanel.DoubleClick += new System.EventHandler(this.exitPanel_Click);
             // 
-            // logo
-            // 
-            this.logo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.logo.Image = global::EasyFine.Properties.Resources.EasyFineLogo;
-            this.logo.Location = new System.Drawing.Point(0, 0);
-            this.logo.Name = "logo";
-            this.logo.Size = new System.Drawing.Size(60, 60);
-            this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.logo.TabIndex = 2;
-            this.logo.TabStop = false;
-            this.logo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
-            // 
             // mainPanel
             // 
             this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.mainPanel.Controls.Add(this.flowLayoutPanel1);
+            this.mainPanel.Controls.Add(this.tabPanel);
             this.mainPanel.Controls.Add(this.itemBox);
-            this.mainPanel.Location = new System.Drawing.Point(5, 60);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.mainPanel.Location = new System.Drawing.Point(0, 100);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(370, 440);
             this.mainPanel.TabIndex = 1;
-            this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
             this.mainPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
             // 
             // flowLayoutPanel1
@@ -125,7 +100,7 @@
             this.flowLayoutPanel1.Controls.Add(this.ytLink);
             this.flowLayoutPanel1.Controls.Add(this.tLink);
             this.flowLayoutPanel1.Controls.Add(this.dcLink);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(10, 395);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 12);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(350, 40);
             this.flowLayoutPanel1.TabIndex = 1;
@@ -134,12 +109,22 @@
             // itemBox
             // 
             this.itemBox.AutoScroll = true;
-            this.itemBox.Location = new System.Drawing.Point(10, 20);
+            this.itemBox.Location = new System.Drawing.Point(10, 60);
             this.itemBox.Margin = new System.Windows.Forms.Padding(5);
             this.itemBox.Name = "itemBox";
             this.itemBox.Size = new System.Drawing.Size(350, 370);
             this.itemBox.TabIndex = 0;
             this.itemBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
+            // 
+            // tabPanel
+            // 
+            this.tabPanel.Controls.Add(this.tab1);
+            this.tabPanel.Controls.Add(this.tab2);
+            this.tabPanel.Location = new System.Drawing.Point(10, 10);
+            this.tabPanel.Name = "tabPanel";
+            this.tabPanel.Size = new System.Drawing.Size(200, 40);
+            this.tabPanel.TabIndex = 1;
+            this.tabPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
             // 
             // openFolder
             // 
@@ -239,40 +224,64 @@
             this.dcLink.TabIndex = 9;
             this.dcLink.URL = "https://discord.nitrostudio.dev";
             // 
+            // tab1
+            // 
+            this.tab1.clicked = false;
+            this.tab1.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(88)))), ((int)(((byte)(162)))));
+            this.tab1.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(88)))), ((int)(((byte)(92)))));
+            this.tab1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tab1.Location = new System.Drawing.Point(10, 0);
+            this.tab1.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.tab1.Name = "tab1";
+            this.tab1.Size = new System.Drawing.Size(80, 40);
+            this.tab1.TabIndex = 2;
+            this.tab1.text = "tab";
+            // 
+            // tab2
+            // 
+            this.tab2.clicked = false;
+            this.tab2.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(88)))), ((int)(((byte)(162)))));
+            this.tab2.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(88)))), ((int)(((byte)(92)))));
+            this.tab2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tab2.Location = new System.Drawing.Point(100, 0);
+            this.tab2.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.tab2.Name = "tab2";
+            this.tab2.Size = new System.Drawing.Size(80, 40);
+            this.tab2.TabIndex = 3;
+            this.tab2.text = "tab";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Fuchsia;
-            this.ClientSize = new System.Drawing.Size(380, 500);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.ClientSize = new System.Drawing.Size(370, 540);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.mainPanel);
-            this.Controls.Add(this.topPanel);
+            this.Controls.Add(this.minPanel);
+            this.Controls.Add(this.exitPanel);
+            this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.Text = "EasyFine";
-            this.TransparencyKey = System.Drawing.Color.Fuchsia;
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Main_Paint);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
-            this.topPanel.ResumeLayout(false);
-            this.topPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.mainPanel.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.tabPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel topPanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Panel minPanel;
         private System.Windows.Forms.Panel exitPanel;
         private System.Windows.Forms.FlowLayoutPanel itemBox;
-        private System.Windows.Forms.PictureBox logo;
         private Link openFolder;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private Link mailLink;
@@ -281,6 +290,9 @@
         private Link ytLink;
         private Link tLink;
         private Link dcLink;
+        private System.Windows.Forms.FlowLayoutPanel tabPanel;
+        private Ctl.Tab tab1;
+        private Ctl.Tab tab2;
     }
 }
 

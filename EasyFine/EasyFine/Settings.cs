@@ -10,7 +10,7 @@ namespace EasyFine {
         static public bool useEasyFineAuto = true;
 
         static public Color themeA = ColorTranslator.FromHtml("#28F29C");
-        static public Color themeB = ColorTranslator.FromHtml("#28F29C");
+        static public Color themeB = ColorTranslator.FromHtml("#0CB8E0");
         static public Color downloadA = ColorTranslator.FromHtml("#4ADEDE");
         static public Color downloadB = ColorTranslator.FromHtml("#787FF6");
         static public Color installedA = ColorTranslator.FromHtml("#FF6CAB");

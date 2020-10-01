@@ -16,6 +16,8 @@ namespace EasyFine {
             InitializeComponent();
             Utils.smoothBorder(minPanel, minPanel.Width);
             Utils.smoothBorder(exitPanel, exitPanel.Width);
+            Utils.smoothBorder(this, 30);
+            Utils.smoothBorder(mainPanel, 30);
             Directory.CreateDirectory(Settings.path);
 
             flowLayoutPanel1.Left = (mainPanel.Width - flowLayoutPanel1.Width) / 2;
@@ -34,7 +36,7 @@ namespace EasyFine {
             ControlStyles.DoubleBuffer, true);
             webBrowser.ScriptErrorsSuppressed = true;
             webBrowser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(getOptiFine);
-            webBrowser.Navigate("https://www.optifine.net/downloads");
+            //webBrowser.Navigate("https://www.optifine.net/downloads");
         }
 
         private void getOptiFine(object sender, WebBrowserDocumentCompletedEventArgs e) {
@@ -66,17 +68,20 @@ namespace EasyFine {
         }
 
         private void minPanel_Click(object sender, EventArgs e) {
-            WindowState = FormWindowState.Minimized;
+            Update();
+            Refresh();
+            //WindowState = FormWindowState.Minimized;
         }
 
         private void exitPanel_Click(object sender, EventArgs e) {
             Close();
         }
 
-        private void mainPanel_Paint(object sender, PaintEventArgs e) {
-            Rectangle rectangle = new Rectangle(0, 0, mainPanel.Width, 20);
-            using (LinearGradientBrush gradientBrush = new LinearGradientBrush(rectangle, Color.FromArgb(255, Color.FromArgb(5, 5, 5)), Color.FromArgb(1, Color.FromArgb(25, 25, 25)), 90))
-                e.Graphics.FillRectangle(gradientBrush, rectangle);
+        private void Main_Paint(object sender, PaintEventArgs e) {
+            Graphics graphics = e.Graphics;
+            Rectangle gradient_rectangle = new Rectangle(0, 0, Width, label1.Height + 20);
+            Brush b = new LinearGradientBrush(gradient_rectangle, Settings.themeA, Settings.themeB, 65f);
+            graphics.FillRectangle(b, gradient_rectangle);
         }
     }
 }

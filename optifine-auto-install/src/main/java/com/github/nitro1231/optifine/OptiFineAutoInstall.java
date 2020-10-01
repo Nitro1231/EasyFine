@@ -31,9 +31,8 @@ public class OptiFineAutoInstall {
             method.invoke(null, installDir);
             System.out.println("[Success] OptiFine has been successfully installed.");
             System.exit(0);
-        } catch (Exception e) {
-            System.err.println("[Error] File is not a valid: " + jarPath.getName());
-            e.printStackTrace();
+        } catch (Throwable e) {
+            throw new IllegalArgumentException("[Error] File is not a valid: " + jarPath.getName());
         }
     }
 }

@@ -53,7 +53,6 @@ namespace EasyFine {
 
         private void Link_Paint(object sender, PaintEventArgs e) {
             Graphics graphics = e.Graphics;
-            graphics.SmoothingMode = SmoothingMode.AntiAlias;
             Rectangle rectangle = new Rectangle(0, 0, Width, Height);
             Brush brush = new LinearGradientBrush(rectangle, Color1, Color2, 65f);
             graphics.FillRectangle(brush, rectangle);

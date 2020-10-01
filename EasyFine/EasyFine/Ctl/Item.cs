@@ -56,7 +56,7 @@ namespace EasyFine {
                                     colorB = Settings.installedB;
                                     textLabel.Text = $"{name}\nInstalled";
                                 } else {
-                                    MessageBox.Show($"An error occurred while installing {name}. Try after disable the auto install mode in the setting tab.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show($"An error occurred while installing {name}. Try after disable the auto install mode in the setting tab.\nExitCode: {process.ExitCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                         } else {
