@@ -10,17 +10,16 @@ using FontAwesome.Sharp;
 
 namespace EasyFine {
     public partial class Main : Form {
-        string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NitroStudio\EasyFine";
         WebBrowser webBrowser = new WebBrowser();
 
         public Main() {
             InitializeComponent();
             Utils.smoothBorder(minPanel, minPanel.Width);
             Utils.smoothBorder(exitPanel, exitPanel.Width);
-            Directory.CreateDirectory(path);
+            Directory.CreateDirectory(Settings.path);
 
             flowLayoutPanel1.Left = (mainPanel.Width - flowLayoutPanel1.Width) / 2;
-            openFolder.URL = path;
+            openFolder.URL = Settings.path;
             openFolder.image = IconChar.FolderOpen.ToBitmap(40, Color.White);
             mailLink.image = IconChar.At.ToBitmap(40, Color.White);
             blogLink.image = IconChar.PaperPlane.ToBitmap(40, Color.White);

@@ -1,0 +1,2 @@
+com/github/nitro1231/optifine/OptiFineAutoInstall.java
+ com.github.nitro1231.optifine.OptiFineAutoInstall

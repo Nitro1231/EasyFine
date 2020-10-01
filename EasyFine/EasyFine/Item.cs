@@ -12,15 +12,15 @@ namespace EasyFine {
     public partial class Item : UserControl {
         int progress = 0;
         string name, downloadPath;
-        string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NitroStudio\EasyFine";
         bool isReady = false, isDownloaded = false;
         WebBrowser webBrowser = new WebBrowser();
+        Color colorA = Settings.downloadA, colorB = Settings.downloadB;
 
         public Item(string name, string url) {
             InitializeComponent();
             Utils.smoothBorder(this, 10);
             this.name = name;
-            downloadPath = path + $"\\{name}.jar";
+            downloadPath = Settings.path + $"\\{name}.jar";
             textLabel.Text = name;
             webBrowser.ScriptErrorsSuppressed = true;
             webBrowser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(DocumentCompleted);
@@ -38,17 +38,38 @@ namespace EasyFine {
                     }
                 } else {
                     if (File.Exists(downloadPath)) {
-                        ProcessStartInfo ps = new ProcessStartInfo("CMD.exe", $"/c java -jar \"{downloadPath}\"");
-                        ps.UseShellExecute = false;
-                        ps.CreateNoWindow = true;
-                        Process.Start(ps);
-                        
-                    }else {
+                        Process process = new Process();
+                        process.StartInfo.UseShellExecute = false;
+                        process.StartInfo.CreateNoWindow = true;
+                        process.StartInfo.FileName = "java";
+
+                        if (Settings.useEasyFineAuto) {
+                            Settings.installTool();
+                            string mineDir = Settings.getMinecraftDir();
+                            if (mineDir != null) {
+                                process.StartInfo.Arguments = $"-jar \"{Settings.toolPath}\" \"{downloadPath}\" \"{mineDir}\"";
+                                process.Start();
+                                while (!process.WaitForExit(100)) ;
+
+                                if (process.ExitCode == 0) {
+                                    colorA = Settings.installedA;
+                                    colorB = Settings.installedB;
+                                    textLabel.Text = $"{name}\nInstalled";
+                                } else {
+                                    MessageBox.Show($"An error occurred while installing {name}. Try after disable the auto install mode in the setting tab.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                        } else {
+                            process.StartInfo.Arguments = $"-jar \"{downloadPath}\"";
+                            process.Start();
+                        }
+
+                    } else {
                         isDownloaded = false;
                         progress = 0;
                         textLabel.Text = name;
                         Update();
-                        MessageBox.Show("File does not exist.", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        MessageBox.Show("File does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -66,7 +87,7 @@ namespace EasyFine {
         }
 
         private void download(string dURL) {
-            Directory.CreateDirectory(path);
+            Directory.CreateDirectory(Settings.path);
             Thread thread = new Thread(() => {
                 WebClient client = new WebClient();
                 client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(onDownload);
@@ -99,7 +120,7 @@ namespace EasyFine {
             Graphics graphics = e.Graphics;
             Rectangle gradient_rectangle = new Rectangle(0, 0, count, Height);
             if (count > 0) {
-                Brush b = new LinearGradientBrush(gradient_rectangle, Color.FromArgb(90, 130, 230), Color.FromArgb(55, 210, 220), 65f);
+                Brush b = new LinearGradientBrush(gradient_rectangle, colorA, colorB, 65f);
                 graphics.FillRectangle(b, gradient_rectangle);
             }
         }

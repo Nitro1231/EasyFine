@@ -61,6 +61,16 @@ namespace EasyFine.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] EasyFineAuto {
+            get {
+                object obj = ResourceManager.GetObject("EasyFineAuto", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap EasyFineLogo {

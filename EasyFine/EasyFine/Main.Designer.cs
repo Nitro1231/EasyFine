@@ -28,10 +28,10 @@
             this.minPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.exitPanel = new System.Windows.Forms.Panel();
-            this.mainPanel = new System.Windows.Forms.Panel();
-            this.itemBox = new System.Windows.Forms.FlowLayoutPanel();
             this.logo = new System.Windows.Forms.PictureBox();
+            this.mainPanel = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.itemBox = new System.Windows.Forms.FlowLayoutPanel();
             this.openFolder = new EasyFine.Link();
             this.mailLink = new EasyFine.Link();
             this.blogLink = new EasyFine.Link();
@@ -40,8 +40,8 @@
             this.tLink = new EasyFine.Link();
             this.dcLink = new EasyFine.Link();
             this.topPanel.SuspendLayout();
-            this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            this.mainPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +55,7 @@
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(380, 60);
+            this.topPanel.Size = new System.Drawing.Size(835, 60);
             this.topPanel.TabIndex = 0;
             this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
             // 
@@ -92,28 +92,6 @@
             this.exitPanel.Click += new System.EventHandler(this.exitPanel_Click);
             this.exitPanel.DoubleClick += new System.EventHandler(this.exitPanel_Click);
             // 
-            // mainPanel
-            // 
-            this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.mainPanel.Controls.Add(this.flowLayoutPanel1);
-            this.mainPanel.Controls.Add(this.itemBox);
-            this.mainPanel.Location = new System.Drawing.Point(5, 60);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(370, 440);
-            this.mainPanel.TabIndex = 1;
-            this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
-            this.mainPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
-            // 
-            // itemBox
-            // 
-            this.itemBox.AutoScroll = true;
-            this.itemBox.Location = new System.Drawing.Point(10, 20);
-            this.itemBox.Margin = new System.Windows.Forms.Padding(5);
-            this.itemBox.Name = "itemBox";
-            this.itemBox.Size = new System.Drawing.Size(350, 370);
-            this.itemBox.TabIndex = 0;
-            this.itemBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
-            // 
             // logo
             // 
             this.logo.Dock = System.Windows.Forms.DockStyle.Left;
@@ -125,6 +103,18 @@
             this.logo.TabIndex = 2;
             this.logo.TabStop = false;
             this.logo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
+            // 
+            // mainPanel
+            // 
+            this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.mainPanel.Controls.Add(this.flowLayoutPanel1);
+            this.mainPanel.Controls.Add(this.itemBox);
+            this.mainPanel.Location = new System.Drawing.Point(5, 60);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(370, 440);
+            this.mainPanel.TabIndex = 1;
+            this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
+            this.mainPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
             // 
             // flowLayoutPanel1
             // 
@@ -140,6 +130,16 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(350, 40);
             this.flowLayoutPanel1.TabIndex = 1;
             this.flowLayoutPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
+            // 
+            // itemBox
+            // 
+            this.itemBox.AutoScroll = true;
+            this.itemBox.Location = new System.Drawing.Point(10, 20);
+            this.itemBox.Margin = new System.Windows.Forms.Padding(5);
+            this.itemBox.Name = "itemBox";
+            this.itemBox.Size = new System.Drawing.Size(350, 370);
+            this.itemBox.TabIndex = 0;
+            this.itemBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
             // 
             // openFolder
             // 
@@ -257,8 +257,8 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
             this.topPanel.ResumeLayout(false);
             this.topPanel.PerformLayout();
-            this.mainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            this.mainPanel.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
