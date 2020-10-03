@@ -20,7 +20,7 @@ namespace EasyFine {
             InitializeComponent();
             Utils.smoothBorder(this, 10);
             this.name = name;
-            downloadPath = Settings.path + $"\\{name}.jar";
+            downloadPath = Settings.path + $"\\OptiFine\\{name}.jar";
             textLabel.Text = name;
             webBrowser.ScriptErrorsSuppressed = true;
 

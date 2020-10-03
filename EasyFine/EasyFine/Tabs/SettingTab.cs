@@ -8,7 +8,7 @@ namespace EasyFine.Tabs {
         public SettingTab() {
             InitializeComponent();
             linkPanel.Left = (Width - linkPanel.Width) / 2;
-            openFolder.URL = Settings.path;
+            openFolder.URL = Settings.path + "\\OptiFine";
             openFolder.image = IconChar.FolderOpen.ToBitmap(40, Color.White);
             mailLink.image = IconChar.At.ToBitmap(40, Color.White);
             blogLink.image = IconChar.PaperPlane.ToBitmap(40, Color.White);

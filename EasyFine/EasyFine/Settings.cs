@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -11,6 +13,7 @@ namespace EasyFine {
 
         static public string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NitroStudio\EasyFine";
         static public string toolPath = path + @"\Tool\EasyFineAuto.jar";
+        static public string updaterPath = path + @"\Tool\Update.exe";
         static public bool useEasyFineAuto = true;
         static public bool showPreview = false;
         static public bool reloadList = true;
@@ -27,6 +30,7 @@ namespace EasyFine {
         static public void installTool() {
             Directory.CreateDirectory(path + @"\Tool");
             File.WriteAllBytes(toolPath, Properties.Resources.EasyFineAuto);
+            File.WriteAllBytes(updaterPath, Properties.Resources.Update);
         }
 
         static public string getMinecraftDir() {
@@ -66,12 +70,24 @@ namespace EasyFine {
 
         static public void checkUpdate() {
             try {
+                string url;
                 ServicePointManager.Expect100Continue = true;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
                 using (WebClient client = new WebClient()) {
-                    string ver = client.DownloadString("https://raw.githubusercontent.com/Nitro1231/EasyFine/master/ver.txt");
-                    newVersion = ver;
+                    string j = client.DownloadString("https://raw.githubusercontent.com/Nitro1231/EasyFine/master/ver.txt");
+                    JObject jObject = JObject.Parse(j);
+                    newVersion = jObject["Version"].ToString();
+                    url = jObject["URL"].ToString();
+                }
+
+                if (version != newVersion) {
+                    installTool();
+                    Process p = Process.GetCurrentProcess();
+                    Process process = new Process();
+                    process.StartInfo.FileName = updaterPath;
+                    process.StartInfo.Arguments = $"EasyFine {p.Id} {version} {newVersion} {url} \"{p.MainModule.FileName}\"";
+                    Environment.Exit(0);
                 }
             } catch (Exception e) {
                 MessageBox.Show(e.ToString());
