@@ -32,6 +32,7 @@
             this.updateLink = new System.Windows.Forms.LinkLabel();
             this.verLabel = new System.Windows.Forms.Label();
             this.newVerLabel = new System.Windows.Forms.Label();
+            this.LOGO = new System.Windows.Forms.PictureBox();
             this.autoInstallToggle = new EasyFine.Ctl.Toggle();
             this.previewToggle = new EasyFine.Ctl.Toggle();
             this.openFolder = new EasyFine.Link();
@@ -43,6 +44,7 @@
             this.dcLink = new EasyFine.Link();
             this.linkPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.updateImg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LOGO)).BeginInit();
             this.SuspendLayout();
             // 
             // linkPanel
@@ -68,6 +70,7 @@
             this.label1.Size = new System.Drawing.Size(178, 21);
             this.label1.TabIndex = 5;
             this.label1.Text = "Display preview version:";
+            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SettingTab_MouseMove);
             // 
             // label2
             // 
@@ -78,6 +81,7 @@
             this.label2.Size = new System.Drawing.Size(91, 21);
             this.label2.TabIndex = 6;
             this.label2.Text = "Auto install:";
+            this.label2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SettingTab_MouseMove);
             // 
             // label3
             // 
@@ -88,6 +92,7 @@
             this.label3.Size = new System.Drawing.Size(63, 21);
             this.label3.TabIndex = 8;
             this.label3.Text = "Update:";
+            this.label3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SettingTab_MouseMove);
             // 
             // updateImg
             // 
@@ -97,6 +102,7 @@
             this.updateImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.updateImg.TabIndex = 9;
             this.updateImg.TabStop = false;
+            this.updateImg.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SettingTab_MouseMove);
             // 
             // updateLabel
             // 
@@ -107,6 +113,7 @@
             this.updateLabel.Size = new System.Drawing.Size(175, 21);
             this.updateLabel.TabIndex = 10;
             this.updateLabel.Text = "Checking new updates...";
+            this.updateLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SettingTab_MouseMove);
             // 
             // updateLink
             // 
@@ -132,6 +139,7 @@
             this.verLabel.Size = new System.Drawing.Size(126, 21);
             this.verLabel.TabIndex = 12;
             this.verLabel.Text = "Current Version: ";
+            this.verLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SettingTab_MouseMove);
             // 
             // newVerLabel
             // 
@@ -142,6 +150,19 @@
             this.newVerLabel.Size = new System.Drawing.Size(105, 21);
             this.newVerLabel.TabIndex = 13;
             this.newVerLabel.Text = "New Version: ";
+            this.newVerLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SettingTab_MouseMove);
+            // 
+            // LOGO
+            // 
+            this.LOGO.Image = global::EasyFine.Properties.Resources.EasyFineLogo;
+            this.LOGO.Location = new System.Drawing.Point(240, 214);
+            this.LOGO.Margin = new System.Windows.Forms.Padding(10);
+            this.LOGO.Name = "LOGO";
+            this.LOGO.Size = new System.Drawing.Size(100, 100);
+            this.LOGO.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.LOGO.TabIndex = 14;
+            this.LOGO.TabStop = false;
+            this.LOGO.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SettingTab_MouseMove);
             // 
             // autoInstallToggle
             // 
@@ -276,6 +297,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.Controls.Add(this.LOGO);
             this.Controls.Add(this.newVerLabel);
             this.Controls.Add(this.verLabel);
             this.Controls.Add(this.updateLink);
@@ -296,6 +318,7 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SettingTab_MouseMove);
             this.linkPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.updateImg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LOGO)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -321,5 +344,6 @@
         private System.Windows.Forms.LinkLabel updateLink;
         private System.Windows.Forms.Label verLabel;
         private System.Windows.Forms.Label newVerLabel;
+        private System.Windows.Forms.PictureBox LOGO;
     }
 }

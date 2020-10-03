@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Windows.Forms;
 
 namespace EasyFine {
@@ -43,7 +44,7 @@ namespace EasyFine {
                 var Myini = new IniFile(path + @"\config.ini");
 
                 if (Myini.KeyExists("Preview"))
-                    showPreview = Convert.ToBoolean(Myini.Read("AutoInstall"));
+                    showPreview = Convert.ToBoolean(Myini.Read("Preview"));
                 else
                     Myini.Write("Preview", showPreview.ToString());
 
@@ -61,6 +62,20 @@ namespace EasyFine {
             var Myini = new IniFile(path + @"\config.ini");
             Myini.Write("Preview", showPreview.ToString());
             Myini.Write("AutoInstall", useEasyFineAuto.ToString());
+        }
+
+        static public void checkUpdate() {
+            try {
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+                using (WebClient client = new WebClient()) {
+                    string ver = client.DownloadString("https://raw.githubusercontent.com/Nitro1231/EasyFine/master/ver.txt");
+                    newVersion = ver;
+                }
+            } catch (Exception e) {
+                MessageBox.Show(e.ToString());
+            }
         }
     }
 }
