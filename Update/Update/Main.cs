@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Update {
     public partial class Main : Form {
-        string path = "";
+        string name, pid, currentVer, newVer, downloadURL, path;
         bool updated = false;
 
         public Main(string[] args) {
@@ -17,25 +17,38 @@ namespace Update {
             Utils.smoothBorder(updateProgressBar, 10);
             Utils.smoothBorder(minPanel, minPanel.Width);
             Utils.smoothBorder(exitPanel, exitPanel.Width);
-
-            if (args.Length < 5) {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            if (args.Length < 7) {
                 MessageBox.Show("Auto Update Failed. Please manually update the program.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 updateLabel.Text = "Update Failed.";
                 updated = true;
             } else {
-                string name = args[0];
-                int pid = Convert.ToInt32(args[1]);
-                string currentVer = args[2];
-                string newVer = args[3];
-                string downloadURL = args[4];
-                path = args[5];
+                name = args[1];
+                pid = args[2];
+                currentVer = args[3];
+                newVer = args[4];
+                downloadURL = args[5];
+                path = args[6];
+            }
+        }
 
+        private void Main_Load(object sender, EventArgs e) {
+            Visible = true;
+            Update();
+            Refresh();
+            if (!updated) {
                 cVerLabel.Text += $"{name} {currentVer}";
                 nVerLabel.Text += $"{name} {newVer}";
 
-                Process process = Process.GetProcessById(pid);
-                updateLabel.Text = "Waiting for the process to exit.";
-                while (!process.WaitForExit(100));
+                try {
+                    Process process = Process.GetProcessById(Convert.ToInt32(pid));
+                    updateLabel.Text = "Waiting for the process to exit.";
+                    while (!process.WaitForExit(100));
+                    Thread.Sleep(500);
+                } catch {
+
+                }
 
                 if (File.Exists(path)) {
                     File.Delete(path);
@@ -68,9 +81,10 @@ namespace Update {
 
         void onDownloadCompleted(object sender, AsyncCompletedEventArgs e) {
             BeginInvoke((MethodInvoker)delegate {
-                updateLabel.Text = "Update Finished";
-                Process.Start(path);
                 updated = true;
+                updateLabel.Text = "Update Finished";
+                Thread.Sleep(1000);
+                Process.Start(path);
                 Close();
             });
         }

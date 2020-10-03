@@ -137,6 +137,7 @@
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Update";
+            this.Load += new System.EventHandler(this.Main_Load);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
             this.ResumeLayout(false);
             this.PerformLayout();

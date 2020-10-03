@@ -13,7 +13,7 @@ namespace EasyFine.Tabs {
         private void EasyFineTab_VisibleChanged(object sender, System.EventArgs e) {
             if (Settings.reloadList) {
                 itemBox.Controls.Clear();
-                webBrowser.Navigate("https://www.optifine.net/downloads");
+                //webBrowser.Navigate("https://www.optifine.net/downloads");
                 Settings.reloadList = false;
             }
         }

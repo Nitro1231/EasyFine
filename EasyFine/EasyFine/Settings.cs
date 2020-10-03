@@ -84,9 +84,8 @@ namespace EasyFine {
                 if (version != newVersion) {
                     installTool();
                     Process p = Process.GetCurrentProcess();
-                    Process process = new Process();
-                    process.StartInfo.FileName = updaterPath;
-                    process.StartInfo.Arguments = $"EasyFine {p.Id} {version} {newVersion} {url} \"{p.MainModule.FileName}\"";
+                    string arguments = $"\"EasyFine\" \"{p.Id}\" \"{version}\" \"{newVersion}\" \"{url}\" \"{p.MainModule.FileName}\"";
+                    Process.Start(updaterPath, arguments);
                     Environment.Exit(0);
                 }
             } catch (Exception e) {
