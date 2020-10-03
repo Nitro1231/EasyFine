@@ -18,6 +18,7 @@ namespace EasyFine {
         public Main() {
             InitializeComponent();
             Settings.mainHandle = Handle;
+            Settings.readSetting();
 
             Utils.smoothBorder(minPanel, minPanel.Width);
             Utils.smoothBorder(exitPanel, exitPanel.Width);

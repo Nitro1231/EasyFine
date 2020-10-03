@@ -49,9 +49,8 @@
             this.Margin = new System.Windows.Forms.Padding(10);
             this.Name = "EasyFineTab";
             this.Size = new System.Drawing.Size(350, 370);
-            this.Load += new System.EventHandler(this.EasyFineTab_Load);
+            this.VisibleChanged += new System.EventHandler(this.EasyFineTab_VisibleChanged);
             this.ResumeLayout(false);
-
         }
 
         #endregion

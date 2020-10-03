@@ -5,12 +5,17 @@ namespace EasyFine.Tabs {
         WebBrowser webBrowser = new WebBrowser();
         public EasyFineTab() {
             InitializeComponent();
-        }
-
-        private void EasyFineTab_Load(object sender, System.EventArgs e) {
             webBrowser.ScriptErrorsSuppressed = true;
             webBrowser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(getOptiFine);
-            webBrowser.Navigate("https://www.optifine.net/downloads");
+            EasyFineTab_VisibleChanged(null, null); 
+        }
+
+        private void EasyFineTab_VisibleChanged(object sender, System.EventArgs e) {
+            if (Settings.reloadList) {
+                itemBox.Controls.Clear();
+                webBrowser.Navigate("https://www.optifine.net/downloads");
+                Settings.reloadList = false;
+            }
         }
 
         private void getOptiFine(object sender, WebBrowserDocumentCompletedEventArgs e) {

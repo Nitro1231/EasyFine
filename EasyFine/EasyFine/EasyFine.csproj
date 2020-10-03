@@ -75,6 +75,13 @@
     <Compile Include="Ctl\Tab.Designer.cs">
       <DependentUpon>Tab.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ctl\Toggle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ctl\Toggle.Designer.cs">
+      <DependentUpon>Toggle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IniFile.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ctl\Tab.resx">
       <DependentUpon>Tab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ctl\Toggle.resx">
+      <DependentUpon>Toggle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

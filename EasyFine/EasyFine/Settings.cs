@@ -5,10 +5,14 @@ using System.Windows.Forms;
 
 namespace EasyFine {
     class Settings {
+        static public string version = "1.0.0";
+        static public string newVersion = null;
+
         static public string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NitroStudio\EasyFine";
         static public string toolPath = path + @"\Tool\EasyFineAuto.jar";
         static public bool useEasyFineAuto = true;
         static public bool showPreview = false;
+        static public bool reloadList = true;
         static public int tabIndex = 0;
         static public IntPtr mainHandle;
 
@@ -32,6 +36,31 @@ namespace EasyFine {
             } else {
                 return mineDir;
             }
+        }
+
+        static public void readSetting() {
+            if (File.Exists(path + @"\config.ini")) {
+                var Myini = new IniFile(path + @"\config.ini");
+
+                if (Myini.KeyExists("Preview"))
+                    showPreview = Convert.ToBoolean(Myini.Read("AutoInstall"));
+                else
+                    Myini.Write("Preview", showPreview.ToString());
+
+                if (Myini.KeyExists("AutoInstall"))
+                    useEasyFineAuto = Convert.ToBoolean(Myini.Read("AutoInstall"));
+                else
+                    Myini.Write("AutoInstall", useEasyFineAuto.ToString());
+
+            } else {
+                writeSetting();
+            }
+        }
+
+        static public void writeSetting() {
+            var Myini = new IniFile(path + @"\config.ini");
+            Myini.Write("Preview", showPreview.ToString());
+            Myini.Write("AutoInstall", useEasyFineAuto.ToString());
         }
     }
 }
