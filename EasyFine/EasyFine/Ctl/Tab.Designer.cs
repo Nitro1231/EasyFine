@@ -38,6 +38,8 @@
             this.textLable.TabIndex = 0;
             this.textLable.Text = "textLable";
             this.textLable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.textLable.Click += new System.EventHandler(this.textLable_Click);
+            this.textLable.DoubleClick += new System.EventHandler(this.textLable_Click);
             // 
             // Tab
             // 
@@ -48,6 +50,7 @@
             this.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.Name = "Tab";
             this.Size = new System.Drawing.Size(80, 40);
+            this.Load += new System.EventHandler(this.Tab_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Link_Paint);
             this.Resize += new System.EventHandler(this.Tab_Resize);
             this.ResumeLayout(false);

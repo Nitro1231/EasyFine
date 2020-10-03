@@ -11,9 +11,9 @@ using System.Diagnostics;
 namespace EasyFine {
     public partial class Item : UserControl {
         int progress = 0;
-        string name, downloadPath;
+        string name, downloadPath, donwloadURL;
         bool isReady = false, isDownloaded = false;
-        WebBrowser webBrowser = new WebBrowser();
+        volatile WebBrowser webBrowser = new WebBrowser();
         Color colorA = Settings.downloadA, colorB = Settings.downloadB;
 
         public Item(string name, string url) {
@@ -23,19 +23,18 @@ namespace EasyFine {
             downloadPath = Settings.path + $"\\{name}.jar";
             textLabel.Text = name;
             webBrowser.ScriptErrorsSuppressed = true;
-            webBrowser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(DocumentCompleted);
-            webBrowser.Navigate(url);
+
+            Thread thread = new Thread(() => {
+                webBrowser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(DocumentCompleted);
+                webBrowser.Navigate(url);
+            });
+            thread.Start();
         }
 
         private void textLabel_Click(object sender, EventArgs e) {
             if (isReady) {
                 if (!isDownloaded) {
-                    HtmlDocument doc = webBrowser.Document;
-                    HtmlElement downloadURL = doc.GetElementById("Download");
-                    foreach (HtmlElement el in downloadURL.GetElementsByTagName("a")) {
-                        download(el.GetAttribute("href"));
-                        break;
-                    }
+                    download(donwloadURL);
                 } else {
                     if (File.Exists(downloadPath)) {
                         Process process = new Process();
@@ -76,6 +75,13 @@ namespace EasyFine {
         }
 
         private void DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e) {
+            HtmlDocument doc = webBrowser.Document;
+            HtmlElement downloadEl = doc.GetElementById("Download");
+            foreach (HtmlElement el in downloadEl.GetElementsByTagName("a")) {
+                donwloadURL = el.GetAttribute("href");
+                break;
+            }
+
             isReady = true;
             textLabel.ForeColor = Color.FromArgb(240, 240, 240);
 

@@ -84,6 +84,18 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Tabs\EasyFineTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tabs\EasyFineTab.Designer.cs">
+      <DependentUpon>EasyFineTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tabs\SettingTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tabs\SettingTab.Designer.cs">
+      <DependentUpon>SettingTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="Ctl\Item.resx">
       <DependentUpon>Item.cs</DependentUpon>
@@ -107,6 +119,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Tabs\EasyFineTab.resx">
+      <DependentUpon>EasyFineTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tabs\SettingTab.resx">
+      <DependentUpon>SettingTab.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -6,61 +6,53 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
-using FontAwesome.Sharp;
+using EasyFine.Ctl;
+using EasyFine.Tabs;
 
 namespace EasyFine {
     public partial class Main : Form {
-        WebBrowser webBrowser = new WebBrowser();
+
+        EasyFineTab easyFineTab;
+        SettingTab settingTab;
 
         public Main() {
             InitializeComponent();
+            Settings.mainHandle = Handle;
+
             Utils.smoothBorder(minPanel, minPanel.Width);
             Utils.smoothBorder(exitPanel, exitPanel.Width);
             Utils.smoothBorder(this, 30);
             Utils.smoothBorder(mainPanel, 30);
             Directory.CreateDirectory(Settings.path);
 
-            flowLayoutPanel1.Left = (mainPanel.Width - flowLayoutPanel1.Width) / 2;
-            openFolder.URL = Settings.path;
-            openFolder.image = IconChar.FolderOpen.ToBitmap(40, Color.White);
-            mailLink.image = IconChar.At.ToBitmap(40, Color.White);
-            blogLink.image = IconChar.PaperPlane.ToBitmap(40, Color.White);
-            gitLink.image = IconChar.Github.ToBitmap(40, Color.White);
-            ytLink.image = IconChar.Youtube.ToBitmap(40, Color.White);
-            tLink.image = IconChar.Twitter.ToBitmap(40, Color.White);
-            dcLink.image = IconChar.Discord.ToBitmap(40, Color.White);
-
             SetStyle(
             ControlStyles.UserPaint |
             ControlStyles.AllPaintingInWmPaint |
             ControlStyles.DoubleBuffer, true);
-            webBrowser.ScriptErrorsSuppressed = true;
-            webBrowser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(getOptiFine);
-            //webBrowser.Navigate("https://www.optifine.net/downloads");
+
+            easyFineTab = new EasyFineTab();
+            settingTab = new SettingTab();
+            settingTab.Visible = false;
+            mainTabPanel.Controls.Add(easyFineTab);
+            mainTabPanel.Controls.Add(settingTab);
         }
 
-        private void getOptiFine(object sender, WebBrowserDocumentCompletedEventArgs e) {
-            HtmlDocument doc = webBrowser.Document;
-            HtmlElementCollection tr = doc.GetElementsByTagName("tr");
+        private void tab_TabClick(object sender, EventArgs e) {
+            foreach (Tab t in tabPanel.Controls)
+                if (t.Index != Settings.tabIndex)
+                    t.disable();
 
-            foreach (HtmlElement td in tr) {
-                if (td.GetAttribute("className") == "downloadLineFirst") {
-                    string name = null, url = null;
-                    foreach (HtmlElement el in td.GetElementsByTagName("td")) {
-                        if (el.GetAttribute("className") == "downloadLineFileFirst")
-                            name = el.InnerText;
+            easyFineTab.Visible = false;
+            settingTab.Visible = false;
 
-                        if (el.GetAttribute("className") == "downloadLineMirror")
-                            foreach (HtmlElement a in el.GetElementsByTagName("a"))
-                                url = a.GetAttribute("href");
-                    }
-
-                    if (name != null && url != null) {
-                        Item item = new Item(name, url);
-                        itemBox.Controls.Add(item);
-                    }
-                }
-            }
+            switch (Settings.tabIndex) {
+                case 0:
+                    easyFineTab.Visible = true;
+                    break;
+                case 1:
+                    settingTab.Visible = true;
+                    break;
+            }    
         }
 
         private void Main_MouseMove(object sender, MouseEventArgs e) {
@@ -68,9 +60,7 @@ namespace EasyFine {
         }
 
         private void minPanel_Click(object sender, EventArgs e) {
-            Update();
-            Refresh();
-            //WindowState = FormWindowState.Minimized;
+            WindowState = FormWindowState.Minimized;
         }
 
         private void exitPanel_Click(object sender, EventArgs e) {

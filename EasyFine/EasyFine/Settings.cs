@@ -8,6 +8,9 @@ namespace EasyFine {
         static public string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NitroStudio\EasyFine";
         static public string toolPath = path + @"\Tool\EasyFineAuto.jar";
         static public bool useEasyFineAuto = true;
+        static public bool showPreview = false;
+        static public int tabIndex = 0;
+        static public IntPtr mainHandle;
 
         static public Color themeA = ColorTranslator.FromHtml("#28F29C");
         static public Color themeB = ColorTranslator.FromHtml("#0CB8E0");
