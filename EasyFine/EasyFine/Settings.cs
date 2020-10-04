@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace EasyFine {
     class Settings {
-        static public string version = "1.0.0";
+        static public string version = "1.0.1";
         static public string newVersion = null;
 
         static public string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\NitroStudio\EasyFine";
@@ -26,6 +26,33 @@ namespace EasyFine {
         static public Color downloadB = ColorTranslator.FromHtml("#787FF6");
         static public Color installedA = ColorTranslator.FromHtml("#FF6CAB");
         static public Color installedB = ColorTranslator.FromHtml("#7366FF");
+
+        static public void install() {
+            Directory.CreateDirectory(path);
+            if (!File.Exists(path + "\\EasyFine.exe")) {
+                File.Copy(Application.ExecutablePath, path + "\\EasyFine.exe");
+
+                string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                using (StreamWriter writer = new StreamWriter(deskDir + "\\EasyFine.url")) {
+                    string app = path + "\\EasyFine.exe";
+                    writer.WriteLine("[InternetShortcut]");
+                    writer.WriteLine("URL=file:///" + app);
+                    writer.WriteLine("IconIndex=0");
+                    string icon = app.Replace('\\', '/');
+                    writer.WriteLine("IconFile=" + icon);
+                }
+
+                Process.Start(path + "\\EasyFine.exe");
+
+                ProcessStartInfo Info = new ProcessStartInfo();
+                Info.Arguments = "/C choice /C Y /N /D Y /T 3 & Del " + Application.ExecutablePath;
+                Info.WindowStyle = ProcessWindowStyle.Hidden;
+                Info.CreateNoWindow = true;
+                Info.FileName = "cmd.exe";
+                Process.Start(Info);
+                Environment.Exit(0);
+            }
+        }
 
         static public void installTool() {
             Directory.CreateDirectory(path + @"\Tool");
@@ -84,7 +111,7 @@ namespace EasyFine {
                 if (version != newVersion) {
                     installTool();
                     Process p = Process.GetCurrentProcess();
-                    string arguments = $"\"EasyFine\" \"{p.Id}\" \"{version}\" \"{newVersion}\" \"{url}\" \"{p.MainModule.FileName}\"";
+                    string arguments = $"\"EasyFine\" \"{p.Id}\" \"{version}\" \"{newVersion}\" \"{url}\" \"{Application.ExecutablePath}\"";
                     Process.Start(updaterPath, arguments);
                     Environment.Exit(0);
                 }
