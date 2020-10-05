@@ -93,7 +93,7 @@ namespace EasyFine {
         }
 
         private void download(string dURL) {
-            Directory.CreateDirectory(Settings.path);
+            Directory.CreateDirectory(Settings.path + @"\OptiFine");
             Thread thread = new Thread(() => {
                 WebClient client = new WebClient();
                 client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(onDownload);
